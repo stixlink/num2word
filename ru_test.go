@@ -15,9 +15,9 @@ var samples = []struct {
 
 func Test_RuMoney(t *testing.T) {
 	for _, tt := range samples {
-		integer, fractionalNumbers := RuMoney(tt.amount, tt.upper)
+		integer, fractionalNumbers := Word(tt.amount, tt.upper)
 		if integer+fractionalNumbers != tt.expected {
-			t.Errorf("RuMoney(%.2f): expected '%s', got '%s'", tt.amount, tt.expected, integer+fractionalNumbers)
+			t.Errorf("Word(%.2f): expected '%s', got '%s'", tt.amount, tt.expected, integer+fractionalNumbers)
 		}
 	}
 }

@@ -1,4 +1,4 @@
-// Package num2word holds Number to words converter
+// Package num2word holds Word to words converter
 package num2word
 
 import (
@@ -93,8 +93,8 @@ var repl = [][]string{
 
 var mask = []string{",,,", ",,", ",", ",,,,", ",,", ",", ",,,,,", ",,", ",", ",,,,,,", ",,", ","}
 
-// RuMoney - деньги прописью на русском
-func RuMoney(number float64, upperFirstChar bool) (integer string, fractionalNumbers string) {
+// Word - деньги прописью на русском
+func Word(number float64, upperFirstChar bool) (integer string, fractionalNumbers string) {
 
 	s := fmt.Sprintf("%.2f", number)
 	l := len(s)
