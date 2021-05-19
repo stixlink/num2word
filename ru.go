@@ -58,10 +58,6 @@ var repl = [][]string{
 	{"8e", "восемь "},
 	{"9e", "девять "},
 	// --
-	{"1e.", "один рубль "},
-	{"2e.", "два рубля "},
-	{"3e.", "три рубля "},
-	{"4e.", "четыре рубля "},
 	{"1et", "одна тысяча "},
 	{"2et", "две тысячи "},
 	{"3et", "три тысячи "},
@@ -74,18 +70,22 @@ var repl = [][]string{
 	{"2eM", "два миллиарда "},
 	{"3eM", "три миллиарда "},
 	{"4eM", "четыре миллиарда "},
+	{"1e", "один "},
+	{"2e", "два "},
+	{"3e", "три "},
+	{"4e", "четыре "},
 	//  блок для написания копеек без сокращения "коп"
-	{"11k", "11 копеек"},
-	{"12k", "12 копеек"},
-	{"13k", "13 копеек"},
-	{"14k", "14 копеек"},
-	{"1k", "1 копейка"},
-	{"2k", "2 копейки"},
-	{"3k", "3 копейки"},
-	{"4k", "4 копейки"},
-	{"k", " копеек"},
+	{"11k", "11"},
+	{"12k", "12"},
+	{"13k", "13"},
+	{"14k", "14"},
+	{"1k", "1"},
+	{"2k", "2"},
+	{"3k", "3"},
+	{"4k", "4"},
+	{"k", ""},
 	// --
-	{".", "рублей "},
+	{".", ""},
 	{"t", "тысяч "},
 	{"m", "миллионов "},
 	{"M", "миллиардов "},
@@ -94,7 +94,7 @@ var repl = [][]string{
 var mask = []string{",,,", ",,", ",", ",,,,", ",,", ",", ",,,,,", ",,", ",", ",,,,,,", ",,", ","}
 
 // RuMoney - деньги прописью на русском
-func RuMoney(number float64, upperFirstChar bool) string {
+func RuMoney(number float64, upperFirstChar bool) (integer string, fractionalNumbers string) {
 
 	s := fmt.Sprintf("%.2f", number)
 	l := len(s)
@@ -106,7 +106,12 @@ func RuMoney(number float64, upperFirstChar bool) string {
 		c := string(s[i-1])
 		dest = c + mask[l-i] + dest
 	}
-
+	destSlice := strings.Split(dest, ".")
+	integer = replaceToWord(destSlice[0], upperFirstChar)
+	fractionalNumbers = replaceToWord(destSlice[1], upperFirstChar)
+	return
+}
+func replaceToWord(dest string, upperFirstChar bool) string {
 	for _, r := range repl {
 		dest = strings.Replace(dest, r[0], r[1], -1)
 	}

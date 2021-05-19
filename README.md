@@ -39,12 +39,13 @@ Usage
 
 ```
 import (
-  "github.com/LeKovr/num2word"
+  "github.com/stixlink/num2word"
 )
 
 ...
-
-text := num2word.RusAmount(total, true)
+// integer - целая часть прописью
+// fractional - дробная  цифрами
+integer, fractional := num2word.RusAmount(total, true)
 ```
 
 License
